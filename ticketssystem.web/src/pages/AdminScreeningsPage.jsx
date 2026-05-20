@@ -93,7 +93,7 @@ export default function AdminScreeningsPage() {
       </div>
 
       <table className="table table-striped table-hover">
-        <thead className="table-dark">
+        <thead style={{ backgroundColor: '#6f42c1', color: 'white' }}>
           <tr><th>Film</th><th>Cinema</th><th>Room Size</th><th>Start Time</th><th>Actions</th></tr>
         </thead>
         <tbody>

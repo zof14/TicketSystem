@@ -20,7 +20,7 @@ export default function ScreeningsPage() {
               <div className="card-body">
                 <h5 className="card-title">{s.filmTitle}</h5>
                 <p className="card-text mb-1"><strong>Cinema:</strong> {s.cinemaName}</p>
-                <p className="card-text mb-1"><strong>Room:</strong> {s.cinemaRows} rows and {s.cinemaSeatsPerRow} seats</p>
+                <p className="card-text mb-1"><strong>Room:</strong> {s.cinemaRows} rows x {s.cinemaSeatsPerRow} seats</p>
                 <p className="card-text"><strong>Start time:</strong> {new Date(s.startTime).toLocaleString()}</p>
               </div>
             </div>
