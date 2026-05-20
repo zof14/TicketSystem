@@ -103,12 +103,12 @@ using (var scope = app.Services.CreateScope())
             await roleMgr.CreateAsync(new IdentityRole(role));
     }
 
-    if (await userMgr.FindByEmailAsync("admin@cinema.local") is null)
+    if (await userMgr.FindByEmailAsync("admin@cinema.pl") is null)
     {
         var admin = new ApplicationUser
         {
-            UserName = "admin@cinema.local",
-            Email = "admin@cinema.local",
+            UserName = "admin@cinema.pl",
+            Email = "admin@cinema.pl",
             FirstName = "Admin",
             LastName = "User"
         };

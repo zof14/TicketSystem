@@ -14,13 +14,15 @@ namespace TicketSystem.Api.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly AppDbContext _db;
 
-        public UsersController(UserManager<ApplicationUser> userManager)
+        public UsersController(UserManager<ApplicationUser> userManager, AppDbContext db)
         {
             _userManager = userManager;
+            _db = db;
         }
 
-        // What we send back to the client
+       
         public record UserDto(
             string Id,
             string? Email,
@@ -29,7 +31,7 @@ namespace TicketSystem.Api.Controllers
             string? PhoneNumber,
             string RowVersion);
 
-        // What the client sends when editing
+        
         public record UpdateUserDto(
             string? FirstName,
             string? LastName,
@@ -111,8 +113,7 @@ namespace TicketSystem.Api.Controllers
 
 
             var clientVersion = Convert.FromBase64String(dto.RowVersion);
-            var db = _userManager.GetDbContext();
-            db.Entry(user).Property(u => u.RowVersion).OriginalValue = clientVersion;
+            _db.Entry(user).Property(u => u.RowVersion).OriginalValue = clientVersion;
 
             user.FirstName = dto.FirstName;
             user.LastName = dto.LastName;
