@@ -11,7 +11,7 @@ export default function ScreeningsPage() {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4">Upcoming Screenings</h2>
+      <h2 className="mb-4 text-center">Upcoming Screenings</h2>
       {screenings.length === 0 && <p className="text-muted">No screenings planned.</p>}
       <div className="row row-cols-1 row-cols-md-3 g-3">
         {screenings.map(s => (

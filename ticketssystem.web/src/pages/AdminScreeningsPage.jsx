@@ -79,7 +79,7 @@ export default function AdminScreeningsPage() {
             </div>
             <div className="col-md-4">
               <label className="form-label">Film Title</label>
-              <input className="form-control" placeholder="e.g. Inception" name="filmTitle" value={form.filmTitle} onChange={handleChange} required />
+              <input className="form-control" name="filmTitle" value={form.filmTitle} onChange={handleChange} required />
             </div>
             <div className="col-md-3">
               <label className="form-label">Start Date & Time</label>
