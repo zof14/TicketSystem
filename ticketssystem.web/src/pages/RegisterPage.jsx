@@ -60,7 +60,7 @@ export default function RegisterPage() {
         </div>
         <button className="btn btn-primary w-100" type="submit">Register</button>
       </form>
-      <p className="mt-3 text-center">Already have an account? <Link to="/login">Login</Link></p>
+      <p className="mt-3 text-center">If you have an account: <Link to="/login">Login</Link></p>
     </div>
   )
 }

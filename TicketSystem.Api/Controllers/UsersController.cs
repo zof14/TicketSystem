@@ -108,9 +108,8 @@ namespace TicketSystem.Api.Controllers
         // Shared logic for updating a user with concurrency check
         private async Task<IActionResult> UpdateUserCore(string userId, UpdateUserDto dto)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _db.Users.FindAsync(userId);
             if (user is null) return NotFound();
-
 
             var clientVersion = Convert.FromBase64String(dto.RowVersion);
             _db.Entry(user).Property(u => u.RowVersion).OriginalValue = clientVersion;
@@ -121,15 +120,12 @@ namespace TicketSystem.Api.Controllers
 
             try
             {
-                var result = await _userManager.UpdateAsync(user);
-                if (!result.Succeeded) return BadRequest(result.Errors);
+                await _db.SaveChangesAsync();
                 return Ok(ToDto(user));
             }
             catch (DbUpdateConcurrencyException)
             {
-                // Someone else saved while this user was editing
-                // Reload from DB and tell the client what the current values are
-                var fresh = await _userManager.FindByIdAsync(userId);
+                var fresh = await _db.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId);
                 return Conflict(new
                 {
                     message = "This user was modified by someone else while you were editing.",

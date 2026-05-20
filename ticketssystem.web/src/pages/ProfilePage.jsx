@@ -55,7 +55,7 @@ export default function ProfilePage() {
       {error && <div className="alert alert-danger">{error}</div>}
       {conflict && (
         <div className="alert alert-warning">
-          <strong>Conflict!</strong> Someone else modified your profile while you were editing.
+          <strong>Conflict!</strong> Someone else modified profile while you were editing.
           <br />Current server values: <em>{conflict.firstName} {conflict.lastName}</em>, phone: <em>{conflict.phoneNumber}</em>
           <br />
           <button className="btn btn-sm btn-warning mt-2" onClick={loadConflict}>Load current values and retry</button>
