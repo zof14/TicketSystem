@@ -7,7 +7,7 @@ using System.Text;
 
 using TicketSystem.Api.Models;
 
-namespace TicketsSystem.Api.Controllers
+namespace TicketSystem.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

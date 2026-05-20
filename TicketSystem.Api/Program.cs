@@ -24,7 +24,7 @@ builder.Services
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
-// JWT Authentication
+
 var jwtKey = builder.Configuration["Jwt:Key"]!;
 builder.Services
     .AddAuthentication(options =>
@@ -46,7 +46,7 @@ builder.Services
         };
     });
 
-// CORS - allow React dev server
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactApp", policy =>
@@ -88,11 +88,11 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Seed roles and default admin on startup
+
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate(); // applies any pending migrations automatically
+    db.Database.Migrate(); 
 
     var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
