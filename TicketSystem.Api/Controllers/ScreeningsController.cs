@@ -32,7 +32,7 @@ namespace TicketSystem.Api.Controllers
             string FilmTitle,
             DateTime StartTime);
 
-        // GET /api/screenings - anyone can view screenings
+        // GET /api/screenings 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ScreeningDto>>> GetAll()
         {
@@ -52,7 +52,7 @@ namespace TicketSystem.Api.Controllers
             return Ok(screenings);
         }
 
-        // GET /api/screenings/{id} - get one screening
+        // GET /api/screenings/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<ScreeningDto>> GetById(int id)
         {
@@ -72,7 +72,7 @@ namespace TicketSystem.Api.Controllers
                 s.StartTime);
         }
 
-        // GET /api/cinemas - anyone can view cinemas
+        // GET /api/cinemas 
         [HttpGet("/api/cinemas")]
         public async Task<IActionResult> GetCinemas()
         {
@@ -82,7 +82,7 @@ namespace TicketSystem.Api.Controllers
             return Ok(cinemas);
         }
 
-        // POST /api/screenings - admin only
+        // POST /api/screenings 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ScreeningDto>> Create(CreateScreeningDto dto)
@@ -112,8 +112,7 @@ namespace TicketSystem.Api.Controllers
                     screening.StartTime));
         }
 
-        // DELETE /api/screenings/{id} - admin only
-        // Reservations are deleted automatically via cascade delete
+        // DELETE /api/screenings/{id} 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)

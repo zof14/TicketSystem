@@ -46,7 +46,7 @@ namespace TicketSystem.Api.Controllers
             u.PhoneNumber,
             Convert.ToBase64String(u.RowVersion));
 
-        // GET /api/users/me - get own profile
+        // GET /api/users/me
         [HttpGet("me")]
         public async Task<ActionResult<UserDto>> GetMe()
         {
@@ -55,7 +55,7 @@ namespace TicketSystem.Api.Controllers
             return ToDto(user);
         }
 
-        // PUT /api/users/me - edit own profile
+        // PUT /api/users/me 
         [HttpPut("me")]
         public async Task<IActionResult> UpdateMe(UpdateUserDto dto)
         {
@@ -63,7 +63,7 @@ namespace TicketSystem.Api.Controllers
             return await UpdateUserCore(userId, dto);
         }
 
-        // GET /api/users - admin gets list of all users
+        // GET /api/users 
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAll()
@@ -72,7 +72,7 @@ namespace TicketSystem.Api.Controllers
             return Ok(users.Select(ToDto));
         }
 
-        // PUT /api/users/{id} - admin edits any user
+        // PUT /api/users/{id} 
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateUser(string id, UpdateUserDto dto)
@@ -80,7 +80,7 @@ namespace TicketSystem.Api.Controllers
             return await UpdateUserCore(id, dto);
         }
 
-        // DELETE /api/users/{id} - admin deletes a user
+        // DELETE /api/users/{id} 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteUser(string id, [FromQuery] string rowVersion)
@@ -88,7 +88,7 @@ namespace TicketSystem.Api.Controllers
             var user = await _userManager.FindByIdAsync(id);
             if (user is null) return NotFound();
 
-            // Concurrency check on delete
+            
             var currentVersion = Convert.ToBase64String(user.RowVersion);
             if (currentVersion != rowVersion)
             {
@@ -105,7 +105,7 @@ namespace TicketSystem.Api.Controllers
             return NoContent();
         }
 
-        // Shared logic for updating a user with concurrency check
+        
         private async Task<IActionResult> UpdateUserCore(string userId, UpdateUserDto dto)
         {
             var user = await _db.Users.FindAsync(userId);
